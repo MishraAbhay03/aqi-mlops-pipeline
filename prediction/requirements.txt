@@ -1,0 +1,11 @@
+flask
+pandas
+numpy
+scikit-learn
+lightgbm
+xgboost
+joblib
+google-cloud-bigquery
+google-cloud-storage
+db-dtypes
+pyarrow

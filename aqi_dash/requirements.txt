@@ -1,0 +1,10 @@
+dash
+plotly
+pandas
+google-cloud-bigquery
+gunicorn
+numpy
+scikit-learn
+xgboost
+lightgbm
+joblib
