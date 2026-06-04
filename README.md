@@ -1,7 +1,7 @@
 # 🌫️ AQI MLOps Pipeline
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![XGBoost](https://img.shields.io/badge/XGBoost-FF6600?style=for-the-badge&logo=xgboost&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-FF6600?style=for-the-badge&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![GCP](https://img.shields.io/badge/GCP-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
@@ -85,10 +85,7 @@ pip install -r requirements.txt
 ### Run Locally
 
 ```bash
-# Start FastAPI server
 uvicorn app:app --reload
-
-# Run Streamlit dashboard
 streamlit run aqi_dash/app.py
 ```
 
@@ -125,7 +122,7 @@ docker run -p 8000:8000 aqi-mlops
 
 ## 👤 Author
 
-**Abhaykumar Mishra** — [GitHub](https://github.com/MishraAbhay03) · [LinkedIn](https://linkedin.com/in/YOUR_LINKEDIN)
+**Abhaykumar Mishra** — [GitHub](https://github.com/MishraAbhay03) · [LinkedIn](https://www.linkedin.com/in/abhaykumar-mishra-791a38300)
 
 ---
 
