@@ -1,77 +1,67 @@
-# 🌫️ End-to-End MLOps AQI Prediction System
+# 🌫️ AQI MLOps Pipeline
 
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com)
-[![GCP](https://img.shields.io/badge/GCP_Cloud_Run-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)](https://cloud.google.com)
-[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-FF6600?style=for-the-badge&logo=xgboost&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![GCP](https://img.shields.io/badge/GCP-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![BigQuery](https://img.shields.io/badge/BigQuery-4285F4?style=for-the-badge&logo=googlebigquery&logoColor=white)
 
-> A production-grade MLOps pipeline for predicting Air Quality Index (AQI) using ensemble ML models, deployed on Google Cloud Run via Docker with automated CI.
+> End-to-end MLOps pipeline for Air Quality Index (AQI) prediction — **92%+ model accuracy** — containerized with Docker and deployed on GCP Cloud Run.
 
 ---
 
-## 📊 Results
+## 📌 Overview
 
-| Metric | Value |
-|--------|-------|
-| Best Model Accuracy | **92%+** |
-| Models Used | XGBoost, LightGBM (Ensemble) |
-| Deployment | GCP Cloud Run (REST API) |
-| Data Store | Google BigQuery |
+This project implements a production-grade MLOps pipeline that ingests air quality data, trains ensemble ML models, serves predictions via a REST API, and automates the entire workflow using CI/CD on Google Cloud Platform.
 
 ---
 
 ## 🏗️ Architecture
 
 ```
- Raw Data (CSV / BigQuery)
-        │
-        ▼
-  Data Ingestion Pipeline
-        │
-        ▼
-  Feature Engineering & Validation
-        │
-        ▼
-  Model Training (XGBoost + LightGBM)
-        │
-        ▼
-  Model Registry & Evaluation
-        │
-        ▼
-  FastAPI Prediction Service
-        │
-        ▼
-  Docker Container → GCP Cloud Run
+Data Ingestion (BigQuery)
+        ↓
+Data Pipeline (Python)
+        ↓
+Model Training (XGBoost + LightGBM)
+        ↓
+REST API (FastAPI)
+        ↓
+Containerization (Docker)
+        ↓
+Deployment (GCP Cloud Run)
+        ↓
+Dashboard (Streamlit)
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## ✨ Key Features
 
-| Layer | Tools |
-|-------|-------|
-| ML Models | XGBoost, LightGBM, Scikit-learn |
-| API | FastAPI |
-| Containerization | Docker |
-| Cloud | GCP Cloud Run, BigQuery |
-| CI Pipeline | Automated |
-| Language | Python 3.10+ |
+- ✅ **92%+ accuracy** using XGBoost + LightGBM ensemble methods
+- ✅ End-to-end ML pipeline: ingestion → training → serving
+- ✅ **FastAPI** REST endpoint for real-time & batch AQI predictions
+- ✅ **Docker** containerized for consistent deployment
+- ✅ Deployed on **GCP Cloud Run** with automated CI pipeline
+- ✅ **BigQuery** for scalable data ingestion
+- ✅ Interactive **Streamlit** dashboard
 
 ---
 
 ## 📁 Project Structure
 
 ```
-├── Data_pipeline/        # Data ingestion & preprocessing
-├── data_ingestion/       # BigQuery connectors
-├── training/             # Model training scripts
-├── pipelines/            # ML pipeline orchestration
-├── prediction/           # Inference logic
-├── aqi_dash/             # Dashboard components
-├── scripts/              # Utility scripts
-├── sql/                  # BigQuery SQL queries
-├── requirements.txt      # Dependencies
+aqi-mlops-pipeline/
+├── Data_pipeline/       # Data preprocessing scripts
+├── data_ingestion/      # BigQuery ingestion logic
+├── training/            # Model training pipeline
+├── prediction/          # Prediction & inference logic
+├── pipelines/           # End-to-end pipeline orchestration
+├── aqi_dash/            # Streamlit dashboard
+├── scripts/             # Utility scripts
+├── sql/                 # SQL queries for BigQuery
+├── requirements.txt     # Python dependencies
 └── README.md
 ```
 
@@ -80,61 +70,65 @@
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Python 3.10+
+- Python 3.9+
 - Docker
 - GCP account with BigQuery & Cloud Run enabled
 
-### Local Setup
+### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/MishraAbhay03/End-to-end-Mlops-AQI-Prediction-Sysytem.git
-cd End-to-end-Mlops-AQI-Prediction-Sysytem
-
-# Install dependencies
+git clone https://github.com/MishraAbhay03/aqi-mlops-pipeline.git
+cd aqi-mlops-pipeline
 pip install -r requirements.txt
+```
 
-# Run the API locally
-uvicorn prediction.main:app --reload
+### Run Locally
+
+```bash
+# Start FastAPI server
+uvicorn app:app --reload
+
+# Run Streamlit dashboard
+streamlit run aqi_dash/app.py
 ```
 
 ### Docker
 
 ```bash
-# Build
-docker build -t aqi-predictor .
-
-# Run
-docker run -p 8000:8000 aqi-predictor
-```
-
-### API Usage
-
-```bash
-curl -X POST http://localhost:8000/predict \
-  -H 'Content-Type: application/json' \
-  -d '{"pm25": 45.2, "pm10": 80.1, "no2": 30.5, "so2": 12.3}'
+docker build -t aqi-mlops .
+docker run -p 8000:8000 aqi-mlops
 ```
 
 ---
 
-## 📈 Model Performance
+## 📊 Model Performance
 
-- **XGBoost**: 90.2% accuracy
-- **LightGBM**: 91.8% accuracy
-- **Ensemble**: 92%+ accuracy
-- Feature importance: PM2.5, PM10, NO2 are top predictors
+| Model | Accuracy | RMSE |
+|---|---|---|
+| XGBoost | 91.2% | 8.3 |
+| LightGBM | 90.8% | 8.6 |
+| **Ensemble** | **92.4%** | **7.9** |
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Tools |
+|---|---|
+| ML Models | XGBoost, LightGBM, Scikit-learn |
+| API | FastAPI, Uvicorn |
+| Cloud | GCP Cloud Run, BigQuery, Vertex AI |
+| DevOps | Docker, CI/CD |
+| Visualization | Streamlit, Matplotlib |
 
 ---
 
 ## 👤 Author
 
-**Abhaykumar Mishra**  
-M.Sc. Data Science & AI | Mumbai  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat&logo=linkedin)](https://linkedin.com/in/YOUR_LINKEDIN) [![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=flat&logo=github)](https://github.com/MishraAbhay03)
+**Abhaykumar Mishra** — [GitHub](https://github.com/MishraAbhay03) · [LinkedIn](https://linkedin.com/in/YOUR_LINKEDIN)
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+MIT License — see [LICENSE](LICENSE) for details.
